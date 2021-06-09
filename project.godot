@@ -14,6 +14,10 @@ config/name="boomerang-bonanza"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Events="*res://src/singletons/Events.cs"
+
 [display]
 
 window/size/width=480
