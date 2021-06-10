@@ -3,16 +3,16 @@ using Godot;
 
 public class SceneChanger : Node2D
 {
-    CanvasLayer canvasLayer;
+    CanvasLayer bgCanvasLayer;
     CanvasLayer playerCanvasLayer;
     AnimationPlayer animPlayer;
     Tween tween;
     
     public override void _Ready()
     {
-        canvasLayer = GetNode<CanvasLayer>("CanvasLayer");
+        bgCanvasLayer = GetNode<CanvasLayer>("GreenBGCanvasLayer");
         playerCanvasLayer = GetNode<CanvasLayer>("PlayerCanvasLayer");
-        animPlayer = GetNode<AnimationPlayer>("CanvasLayer/AnimationPlayer");
+        animPlayer = GetNode<AnimationPlayer>("GreenBGCanvasLayer/AnimationPlayer");
         tween = GetNode<Tween>("Tween");
 
         Events.nextLevelPressed += OnNextLevel;
@@ -25,13 +25,15 @@ public class SceneChanger : Node2D
 
     async void OnNextLevel()
     {
-        // layer to go over the current level
-        canvasLayer.Layer = 1;
+        LevelsInfo li = LevelsInfo.Instance;
+
+
+        // layer goes behind the level, provides green background
+        //? we could probably set the clear color of the project and achieve the same w/out the canvas layer but that feels a bit hackish so we'll keep it this way
+        bgCanvasLayer.Layer = -1;
         
         // set the color of the ColorRect
         animPlayer.Play("nextLevel");
-        
-        LevelsInfo li = LevelsInfo.Instance;
 
         // get current level node
         Enums.Levels currentLevelEnum = li.currentLevel;
@@ -48,24 +50,25 @@ public class SceneChanger : Node2D
         String nextLevelName = Enum.GetName(nextLevelEnum.GetType(), (int)nextLevelEnum);
         var nextLevelChild = GetNode("/root/" + nextLevelName);
 
-        // get rid of current level (hidden by the canvas layer)
-        currentLevelNode.QueueFree();
-
-        // now that current level removed, layer to be below the soon-to-be next level
-        canvasLayer.Layer = -1;
-
         // get the Player node from next level and reparent it to SceneChanger
+        // so that its position doesn't change when the other level elements move
         var playerNode = nextLevelChild.GetNode("Player");
         nextLevelChild.RemoveChild(playerNode);
         playerCanvasLayer.AddChild(playerNode);
 
-        // move the next level scene down over the current level scene
+        // delete player from current level (fully overlapped by the newly re-parented player)
+        currentLevelNode.GetNode("Player").QueueFree();
+
+        // move current level out of screen and next level onto it
         tween.InterpolateProperty(nextLevelChild, "position", null, Vector2.Zero, 2);
-        
-        // TODO: play the charcter walking animation
+        tween.InterpolateProperty(currentLevelNode, "position", null, new Vector2(0, 720), 2);
+        // TODO: insert charcter walking animation
 
         tween.Start();
         await ToSignal(tween, "tween_all_completed");
+
+        // get rid of current level (now off-screen)
+        currentLevelNode.QueueFree();
 
         // after transition is done, move the Player back to next level
         playerCanvasLayer.RemoveChild(playerNode);
