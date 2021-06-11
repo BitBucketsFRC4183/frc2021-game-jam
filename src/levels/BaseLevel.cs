@@ -6,16 +6,14 @@ public class BaseLevel : Node2D
     [Export] public Enums.Levels level;
 
     Menu Menu { get; set; }
-    Button TempNextLvlButton { get; set; }
+    ScoreMenu ScoreMenu { get; set; }
     Control HUDContainer { get; set; }
 
     public override void _Ready()
     {
         Menu = GetNode<Menu>("Menu");
+        ScoreMenu = GetNode<ScoreMenu>("ScoreMenu");
         HUDContainer = (Control)FindNode("HUDContainer");
-        TempNextLvlButton = (Button)FindNode("TempNextLvlButton");
-
-        TempNextLvlButton.Connect("pressed", this, nameof(OnTempNextLvlButtonPressed));
 
         if (!LevelsInfo.Instance.gameStarted)
         {
@@ -23,18 +21,36 @@ public class BaseLevel : Node2D
         }
 
         Events.startGame += OnStartGame;
+        Events.levelCompleted += OnLevelCompleted;
+        Events.startNextLevel += OnStartNextLevel;
     }
 
     public override void _ExitTree()
     {
         Events.startGame -= OnStartGame;
+        Events.levelCompleted -= OnLevelCompleted;
+        Events.startNextLevel -= OnStartNextLevel;
     }
 
-    private void OnStartGame()
+    void OnStartGame()
     {
         Menu.Visible = false;
         GetTree().Paused = false;
-        TempNextLvlButton.Visible = true;
+        HUDContainer.Visible = true;
+    }
+
+    void OnLevelCompleted()
+    {
+        ScoreMenu.Score = 2; // TODO: add in actual score..
+        ScoreMenu.Visible = true;
+        GetTree().Paused = true;
+        HUDContainer.Visible = false;
+    }
+
+    void OnStartNextLevel()
+    {
+        ScoreMenu.Visible = false;
+        GetTree().Paused = false;
         HUDContainer.Visible = true;
     }
 
@@ -43,7 +59,7 @@ public class BaseLevel : Node2D
         base._UnhandledInput(@event);
         if (@event.IsActionPressed("show_menu"))
         {
-            Events.PublishStartGame();
+            ShowMenu();
         }
     }
 
@@ -53,12 +69,6 @@ public class BaseLevel : Node2D
         Menu.Visible = true;
         GetTree().Paused = true;
         HUDContainer.Visible = false;
-    }
-
-    void OnTempNextLvlButtonPressed()
-    {
-        TempNextLvlButton.Visible = false;
-        Events.PublishNextLevelPressed();
     }
 
 }

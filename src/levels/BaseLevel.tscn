@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/levels/BaseLevel.cs" type="Script" id=2]
 [ext_resource path="res://src/Menu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/ScoreMenu.tscn" type="PackedScene" id=4]
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource( 2 )
@@ -22,18 +23,11 @@ position = Vector2( 234.759, 551.543 )
 [node name="Menu" parent="." instance=ExtResource( 3 )]
 visible = false
 
+[node name="ScoreMenu" parent="." instance=ExtResource( 4 )]
+visible = false
+
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 5
-
-[node name="TempNextLvlButton" type="Button" parent="HUD"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -20.0
-text = "(temporary) NEXT LEVEL"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HUDContainer" type="MarginContainer" parent="HUD"]
 anchor_right = 1.0

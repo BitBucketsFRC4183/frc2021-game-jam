@@ -15,12 +15,12 @@ public class SceneChanger : Node2D
         animPlayer = GetNode<AnimationPlayer>("GreenBGCanvasLayer/AnimationPlayer");
         tween = GetNode<Tween>("Tween");
 
-        Events.nextLevelPressed += OnNextLevel;
+        Events.startNextLevel += OnNextLevel;
     }
 
     public override void _ExitTree()
     {
-        Events.nextLevelPressed -= OnNextLevel;
+        Events.startNextLevel -= OnNextLevel;
     }
 
     async void OnNextLevel()
