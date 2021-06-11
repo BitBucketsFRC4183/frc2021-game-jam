@@ -16,7 +16,7 @@ public class Player : Node2D
 
     public override void _Ready()
     {
-        boomerang = GetNode<Boomerang>("Boomerang");
+        boomerang = GetNode<Boomerang>("PlayerSprites/Boomerang");
         tween = GetNode<Tween>("Tween");
         forceBar = GetNode<ProgressBar>("ForceBar");
         sprites = GetNode<Node2D>("PlayerSprites");

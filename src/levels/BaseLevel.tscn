@@ -16,22 +16,50 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 234.759, 551.543 )
+
 [node name="Menu" parent="." instance=ExtResource( 3 )]
 visible = false
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 layer = 5
 
-[node name="TempNextLvlButton" type="Button" parent="CanvasLayer"]
-visible = false
-margin_left = 150.197
-margin_top = 366.485
-margin_right = 312.197
-margin_bottom = 390.485
+[node name="TempNextLvlButton" type="Button" parent="HUD"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
 text = "(temporary) NEXT LEVEL"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 234.759, 551.543 )
+[node name="HUDContainer" type="MarginContainer" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_top = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/HUDContainer"]
+margin_top = 10.0
+margin_right = 480.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/HUDContainer/VBoxContainer"]
+margin_right = 480.0
+margin_bottom = 48.0
+
+[node name="InstructionsLabel" type="Label" parent="HUD/HUDContainer/VBoxContainer/HBoxContainer"]
+margin_right = 480.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+text = "Press and hold the left mouse button to throw a boomerang.
+
+Try throwing the boomerang with higher power!"
+align = 1
