@@ -27,6 +27,12 @@ public class Player : Node2D
         Events.levelCompleted += OnLevelCompleted;
     }
 
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        Events.levelCompleted -= OnLevelCompleted;
+    }
+
     public override void _PhysicsProcess(float delta)
     {
         var direction = GetGlobalMousePosition() - sprites.GlobalPosition;

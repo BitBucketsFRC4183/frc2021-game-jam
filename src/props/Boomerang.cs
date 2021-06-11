@@ -9,13 +9,11 @@ public class Boomerang : KinematicBody2D
     float Force { get; set; }
     bool Moving { get; set; }
 
-    Node parent;
-
     VisibilityNotifier2D visibilityNotifier2D;
     public override void _Ready()
     {
         visibilityNotifier2D = GetNode<VisibilityNotifier2D>("VisibilityNotifier2D");
-        parent = GetParent();
+        visibilityNotifier2D.Connect("viewport_exited", this, nameof(OnVisibilityNotifier2DViewportExited));
     }
 
     public override void _PhysicsProcess(float delta)
@@ -31,21 +29,17 @@ public class Boomerang : KinematicBody2D
         {
             Moving = false;
             Position = Vector2.Zero;
-            if (parent != null && GetParent() != null)
-            {
-                // remove ourselves from whoever we are attached to and add us back to
-                // our original parent.
-                GetParent().RemoveChild(this);
-                parent?.AddChild(this);
-            }
         }
 
     }
 
-    void OnVisibilityNotifier2DViewportExited()
+    void OnVisibilityNotifier2DViewportExited(Viewport viewport)
     {
-        Events.PublishLevelCompleted();
-        QueueFree();
+        if (GetParent() != null && GetParent() == GetTree().Root)
+        {
+            Events.PublishLevelCompleted();
+            QueueFree();
+        }
     }
 
     // TODO: actual boomerang code
@@ -60,7 +54,7 @@ public class Boomerang : KinematicBody2D
         // then add ourselves to the root scene tree
         var globalPosition = GlobalPosition;
         var root = GetTree().Root;
-        parent?.RemoveChild(this);
+        GetParent()?.RemoveChild(this);
         root.AddChild(this);
         GlobalPosition = globalPosition;
 

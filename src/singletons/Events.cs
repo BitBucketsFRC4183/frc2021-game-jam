@@ -7,7 +7,7 @@ public class Events : Node
     public static event Action startGame;
     public static event Action endGame;
     public static event Action levelCompleted;
-    public static event Action nextLevelPressed;
+    public static event Action startNextLevel;
     public static event Action gemCollected;
 
 
@@ -17,5 +17,5 @@ public class Events : Node
     public static void PublishStartGame() => startGame?.Invoke();
     public static void PublishEndGame() => endGame?.Invoke();
     public static void PublishLevelCompleted() => levelCompleted?.Invoke();
-    public static void PublishNextLevelPressed() => nextLevelPressed?.Invoke();
+    public static void PublishStartNextLevel() => startNextLevel?.Invoke();
 }
