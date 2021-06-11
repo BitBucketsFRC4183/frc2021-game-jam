@@ -19,7 +19,6 @@ config/icon="res://icon.png"
 Events="*res://src/singletons/Events.cs"
 SceneChanger="*res://src/singletons/SceneChanger.tscn"
 LevelsInfo="*res://src/singletons/LevelsInfo.cs"
-Enums="*res://src/singletons/Enums.cs"
 
 [display]
 
