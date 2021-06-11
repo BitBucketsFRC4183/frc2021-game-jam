@@ -16,9 +16,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 236.84, 520.822 )
-
 [node name="Menu" parent="." instance=ExtResource( 3 )]
 visible = false
 
@@ -35,3 +32,6 @@ text = "(temporary) NEXT LEVEL"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 234.759, 551.543 )

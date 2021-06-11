@@ -20,16 +20,19 @@ public class Player : Node2D
         tween = GetNode<Tween>("Tween");
         forceBar = GetNode<ProgressBar>("ForceBar");
         sprites = GetNode<Node2D>("PlayerSprites");
+
+        forceBar.Hide();
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        var direction = GetGlobalMousePosition() - sprites.Position;
+        var direction = GetGlobalMousePosition() - sprites.GlobalPosition;
         sprites.Rotation = direction.Angle() + Mathf.Deg2Rad(90);
 
         if (Input.IsMouseButtonPressed(1))
         {
             changingForce = true;
+            forceBar.Show();
 
             if (barIncreasingInPower)
             {
@@ -56,6 +59,7 @@ public class Player : Node2D
                 boomerang.equation(sprites.Rotation, forceLevel);
                 forceLevel = 0;
                 barIncreasingInPower = true;
+                forceBar.Hide();
             }
         }
 
