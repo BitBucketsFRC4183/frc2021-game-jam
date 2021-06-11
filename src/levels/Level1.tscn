@@ -13,18 +13,3 @@ text = "level 1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
-layer = 5
-
-[node name="TempNextLvlButton" type="Button" parent="CanvasLayer" index="0"]
-margin_left = 150.197
-margin_top = 366.485
-margin_right = 312.197
-margin_bottom = 390.485
-text = "(temporary) NEXT LEVEL"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="pressed" from="CanvasLayer/TempNextLvlButton" to="." method="_on_TempNextLvlButton_pressed"]
