@@ -89,7 +89,7 @@ tracks/2/keys = {
 script = ExtResource( 4 )
 
 [node name="Boomerang" parent="." instance=ExtResource( 1 )]
-position = Vector2( 233.366, 458.917 )
+position = Vector2( 0.376404, -36.845 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Stand"
@@ -97,7 +97,6 @@ anims/Stand = SubResource( 1 )
 anims/Walk = SubResource( 2 )
 
 [node name="PlayerSprites" type="Node2D" parent="."]
-position = Vector2( 233, 504 )
 
 [node name="Robot Legs" type="Sprite" parent="PlayerSprites"]
 rotation = 0.785398
@@ -108,7 +107,7 @@ rotation = -0.785398
 texture = ExtResource( 3 )
 
 [node name="Robot Head" type="Sprite" parent="PlayerSprites"]
-modulate = Color( 0, 1, 0.0404987, 1 )
+modulate = Color( 0, 1, 1, 1 )
 texture = ExtResource( 2 )
 
 [node name="Line2D" type="Line2D" parent="PlayerSprites"]
@@ -120,10 +119,10 @@ default_color = Color( 0.898039, 0.0509804, 0.0509804, 1 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="ForceBar" type="ProgressBar" parent="."]
-margin_left = 288.0
-margin_top = 511.0
-margin_right = 375.0
-margin_bottom = 541.0
+margin_left = 55.0104
+margin_top = 6.82906
+margin_right = 142.01
+margin_bottom = 36.8291
 rect_rotation = -90.0
 max_value = 10.0
 step = 0.1
