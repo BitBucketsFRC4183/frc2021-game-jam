@@ -11,10 +11,4 @@ public class Events : Node
 
     public static void publishLevelCompeted(int stars) => levelCompleted?.Invoke(stars);
     public static void publishNextLevelPressed() => nextLevelPressed?.Invoke();
-
-
-    public override void _Ready()
-    {
-        OS.WindowMaximized = true;
-    }
 }

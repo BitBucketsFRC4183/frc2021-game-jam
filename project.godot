@@ -11,12 +11,15 @@ config_version=4
 [application]
 
 config/name="boomerang-bonanza"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://src/levels/Level1.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Events="*res://src/singletons/Events.cs"
+SceneChanger="*res://src/singletons/SceneChanger.tscn"
+LevelsInfo="*res://src/singletons/LevelsInfo.cs"
+Enums="*res://src/singletons/Enums.cs"
 
 [display]
 

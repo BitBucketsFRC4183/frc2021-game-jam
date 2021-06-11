@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/singletons/SceneChanger.cs" type="Script" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "nextLevel"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.133333, 0.564706, 0.184314, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[node name="SceneChanger" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="GreenBGCanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GreenBGCanvasLayer"]
+autoplay = "start"
+anims/nextLevel = SubResource( 1 )
+anims/start = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="GreenBGCanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerCanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Tween" type="Tween" parent="."]
