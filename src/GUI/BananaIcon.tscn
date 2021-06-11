@@ -16,3 +16,6 @@ anchor_bottom = 0.034
 margin_right = -0.16
 margin_bottom = 3.52
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

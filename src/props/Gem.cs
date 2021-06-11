@@ -23,7 +23,7 @@ public class Gem : Node2D
     }
 
     void OnTweenTweenCompleted() {
-        Events.publishGemCollected();
+        Events.PublishGemCollected();
         QueueFree();
     }
 }
