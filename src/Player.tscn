@@ -101,17 +101,21 @@ position = Vector2( 233, 504 )
 
 [node name="Robot Legs" type="Sprite" parent="PlayerSprites"]
 rotation = 0.785398
-scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
 
 [node name="Robot Legs2" type="Sprite" parent="PlayerSprites"]
 rotation = -0.785398
-scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
 
 [node name="Robot Head" type="Sprite" parent="PlayerSprites"]
 modulate = Color( 0, 1, 0.0404987, 1 )
 texture = ExtResource( 2 )
+
+[node name="Line2D" type="Line2D" parent="PlayerSprites"]
+position = Vector2( 1.06665, -37.9291 )
+points = PoolVector2Array( 0, 0, 0, 20 )
+width = 3.0
+default_color = Color( 0.898039, 0.0509804, 0.0509804, 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
