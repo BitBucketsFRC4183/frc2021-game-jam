@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/props/Boomerang.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Robot Head.png" type="Texture" id=2]
 [ext_resource path="res://assets/Robot Legs.png" type="Texture" id=3]
+[ext_resource path="res://src/Player.cs" type="Script" id=4]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Stand"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimationPlayer/Robot Legs:rotation_degrees")
+tracks/0/path = NodePath("PlayerSprites/Robot Legs:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -20,7 +21,7 @@ tracks/0/keys = {
 "values": [ 45.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AnimationPlayer/Robot Legs2:rotation_degrees")
+tracks/1/path = NodePath("PlayerSprites/Robot Legs2:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -32,7 +33,7 @@ tracks/1/keys = {
 "values": [ -45.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AnimationPlayer/Robot Head:modulate")
+tracks/2/path = NodePath("PlayerSprites/Robot Head:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -44,12 +45,11 @@ tracks/2/keys = {
 "values": [ Color( 0, 1, 1, 1 ), Color( 0, 1, 0, 1 ), Color( 0, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Walk"
+[sub_resource type="Animation" id=2]
 length = 0.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimationPlayer/Robot Legs:rotation_degrees")
+tracks/0/path = NodePath("PlayerSprites/Robot Legs:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -61,7 +61,7 @@ tracks/0/keys = {
 "values": [ 45.0, 5.0, 45.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AnimationPlayer/Robot Legs2:rotation_degrees")
+tracks/1/path = NodePath("PlayerSprites/Robot Legs2:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -73,7 +73,7 @@ tracks/1/keys = {
 "values": [ -45.0, -5.0, -45.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AnimationPlayer/Robot Head:modulate")
+tracks/2/path = NodePath("PlayerSprites/Robot Head:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -86,21 +86,44 @@ tracks/2/keys = {
 }
 
 [node name="Player" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="Boomerang" parent="." instance=ExtResource( 1 )]
+position = Vector2( 233.366, 458.917 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Stand = SubResource( 2 )
-anims/Walk = SubResource( 1 )
+autoplay = "Stand"
+anims/Stand = SubResource( 1 )
+anims/Walk = SubResource( 2 )
 
-[node name="Robot Legs" type="Sprite" parent="AnimationPlayer"]
+[node name="PlayerSprites" type="Node2D" parent="."]
+position = Vector2( 233, 504 )
+
+[node name="Robot Legs" type="Sprite" parent="PlayerSprites"]
 rotation = 0.785398
+scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
 
-[node name="Robot Legs2" type="Sprite" parent="AnimationPlayer"]
+[node name="Robot Legs2" type="Sprite" parent="PlayerSprites"]
 rotation = -0.785398
+scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
 
-[node name="Robot Head" type="Sprite" parent="AnimationPlayer"]
-modulate = Color( 0, 1, 0.733599, 1 )
+[node name="Robot Head" type="Sprite" parent="PlayerSprites"]
+modulate = Color( 0, 1, 0.0404987, 1 )
 texture = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="ForceBar" type="ProgressBar" parent="."]
+margin_left = 288.0
+margin_top = 511.0
+margin_right = 375.0
+margin_bottom = 541.0
+rect_rotation = -90.0
+max_value = 10.0
+step = 0.1
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

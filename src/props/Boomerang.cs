@@ -11,7 +11,10 @@ public class Boomerang : KinematicBody2D
     }
 
     // Scott: please give this a proper name and proper parameters i just put this here to have the equation in the codebase somewhere
-    public double equation() {
+    public double equation(double direction, double force) {
+
+        GD.Print("LAUNCHED AT " + force + "!!!");
+
         var x = 1;
         var y = 2;
 
