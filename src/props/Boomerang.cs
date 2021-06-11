@@ -6,7 +6,7 @@ public class Boomerang : KinematicBody2D
     const float Speed = 100f;
 
     Vector2 Direction { get; set; }
-    float Force { get; set; }
+    public float Force { get; set; }
     bool Moving { get; set; }
 
     VisibilityNotifier2D visibilityNotifier2D;

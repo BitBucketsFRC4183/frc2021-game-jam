@@ -114,7 +114,7 @@ width = 3.0
 default_color = Color( 0.898039, 0.0509804, 0.0509804, 1 )
 
 [node name="Boomerang" parent="PlayerSprites" instance=ExtResource( 1 )]
-position = Vector2( 0.376404, -36.845 )
+position = Vector2( 0, -37 )
 
 [node name="Tween" type="Tween" parent="."]
 

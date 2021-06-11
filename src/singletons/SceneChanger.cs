@@ -62,10 +62,11 @@ public class SceneChanger : Node2D
         // move current level out of screen and next level onto it
         tween.InterpolateProperty(nextLevelChild, "position", null, Vector2.Zero, 2);
         tween.InterpolateProperty(currentLevelNode, "position", null, new Vector2(0, 720), 2);
-        // TODO: insert charcter walking animation
+        playerNode.GetNode<AnimationPlayer>("AnimationPlayer").Play("Walk");
 
         tween.Start();
         await ToSignal(tween, "tween_all_completed");
+        playerNode.GetNode<AnimationPlayer>("AnimationPlayer").Play("Stand");
 
         // get rid of current level (now off-screen)
         currentLevelNode.QueueFree();

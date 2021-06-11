@@ -15,10 +15,12 @@ public class Gem : Node2D
 
         tween.InterpolateProperty(sprite, "scale", null, new Vector2(2, 2), (float)0.6, Tween.TransitionType.Cubic, Tween.EaseType.Out);
         tween.InterpolateProperty(sprite, "modulate", null, new Color(0, 0, 0, 0), (float)0.6, Tween.TransitionType.Linear, Tween.EaseType.Out);
+
+        this.Connect("body_entered", this, nameof(OnGemBodyEntered));
     }
 
-    void OnGemBodyEntered() {
-        collisionShape.Disabled = true;
+    void OnGemBodyEntered(Node body) {
+        collisionShape.SetDeferred("disabled", true);
         tween.Start();
     }
 
