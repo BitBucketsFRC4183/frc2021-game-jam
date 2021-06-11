@@ -22,6 +22,9 @@ public class Player : Node2D
         sprites = GetNode<Node2D>("PlayerSprites");
 
         forceBar.Hide();
+
+        // TODO: TEMPORARY!
+        Events.levelCompleted += OnLevelCompleted;
     }
 
     public override void _PhysicsProcess(float delta)
@@ -66,5 +69,13 @@ public class Player : Node2D
         tween.InterpolateProperty(forceBar, "value", null, forceLevel, (float)0.1);
         tween.Start();
 
+    }
+
+    // TODO: TEMPORARY!
+    void OnLevelCompleted()
+    {
+        Boomerang newBoomerang = (Boomerang)GD.Load<PackedScene>("res://src/props/Boomerang.tscn").Instance();
+        newBoomerang.Position = new Vector2(0, -37);
+        sprites.AddChild(newBoomerang);
     }
 }

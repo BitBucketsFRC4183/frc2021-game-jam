@@ -42,7 +42,13 @@ public class Boomerang : KinematicBody2D
 
     }
 
-    // Scott: please give this a proper name and proper parameters i just put this here to have the equation in the codebase somewhere
+    void OnVisibilityNotifier2DViewportExited()
+    {
+        Events.PublishLevelCompleted();
+        QueueFree();
+    }
+
+    // TODO: actual boomerang code
     public void Throw(double angle, float force)
     {
         Moving = true;
