@@ -9,8 +9,8 @@ public class Player : Node2D
     Node2D sprites;
     bool barIncreasingInPower = true;
 
-    double forceLevel = 0;
-    double maxForceLevel = 10;
+    float forceLevel = 0;
+    float maxForceLevel = 10;
 
     bool changingForce = false;
 
@@ -36,7 +36,7 @@ public class Player : Node2D
 
             if (barIncreasingInPower)
             {
-                forceLevel += 0.1;
+                forceLevel += 0.1f;
                 if (forceLevel >= maxForceLevel)
                 {
                     barIncreasingInPower = false;
@@ -44,7 +44,7 @@ public class Player : Node2D
             }
             else
             {
-                forceLevel -= 0.1;
+                forceLevel -= 0.1f;
                 if (forceLevel <= 0)
                 {
                     barIncreasingInPower = true;
@@ -56,7 +56,7 @@ public class Player : Node2D
             if (changingForce)
             {
                 changingForce = false;
-                boomerang.equation(sprites.Rotation, forceLevel);
+                boomerang.Throw(sprites.Rotation, forceLevel);
                 forceLevel = 0;
                 barIncreasingInPower = true;
                 forceBar.Hide();
