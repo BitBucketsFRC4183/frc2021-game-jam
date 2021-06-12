@@ -33,12 +33,12 @@ public class Block : Area2D
 
     void OnRightBodyEntered(Node body)
     {
-        if (body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
+        if (IsInstanceValid(boomerangAlreadyCollidedWith) && body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
         boomerangAlreadyCollidedWith = (BoomerangBody)body;
 
         var force = ((BoomerangBody)body).Force;
 
-        if (body.Name == "Boomerang")
+        if (body.Name == "BoomerangBody")
         {
             tween.InterpolateProperty(this, "position", null, Position - new Vector2(10 * force, 0), 2, trans, ease);
             tween.Start();
@@ -47,12 +47,12 @@ public class Block : Area2D
 
     void OnLeftBodyEntered(Node body)
     {
-        if (body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
+        if (IsInstanceValid(boomerangAlreadyCollidedWith) && body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
         boomerangAlreadyCollidedWith = (BoomerangBody)body;
 
         var force = ((BoomerangBody)body).Force;
 
-        if (body.Name == "Boomerang")
+        if (body.Name == "BoomerangBody")
         {
             tween.InterpolateProperty(this, "position", null, Position + new Vector2(10 * force, 0), 2, trans, ease);
             tween.Start();
@@ -61,12 +61,12 @@ public class Block : Area2D
 
     void OnTopBodyEntered(Node body)
     {
-        if (body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
+        if (IsInstanceValid(boomerangAlreadyCollidedWith) && body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
         boomerangAlreadyCollidedWith = (BoomerangBody)body;
 
         var force = ((BoomerangBody)body).Force;
 
-        if (body.Name == "Boomerang")
+        if (body.Name == "BoomerangBody")
         {
             tween.InterpolateProperty(this, "position", null, Position + new Vector2(0, 10 * force), 2, trans, ease);
             tween.Start();
@@ -75,12 +75,12 @@ public class Block : Area2D
 
     void OnBottomBodyEntered(Node body)
     {
-        if (body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
+        if (IsInstanceValid(boomerangAlreadyCollidedWith) && body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
         boomerangAlreadyCollidedWith = (BoomerangBody)body;
 
         var force = ((BoomerangBody)body).Force;
 
-        if (body.Name == "Boomerang")
+        if (body.Name == "BoomerangBody")
         {
             tween.InterpolateProperty(this, "position", null, Position - new Vector2(0, 10 * force), 2, trans, ease);
             tween.Start();
