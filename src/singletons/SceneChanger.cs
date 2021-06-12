@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Godot;
 
 public class SceneChanger : Node2D
@@ -7,7 +8,7 @@ public class SceneChanger : Node2D
     CanvasLayer playerCanvasLayer;
     AnimationPlayer animPlayer;
     Tween tween;
-    
+
     public override void _Ready()
     {
         bgCanvasLayer = GetNode<CanvasLayer>("GreenBGCanvasLayer");
@@ -16,22 +17,33 @@ public class SceneChanger : Node2D
         tween = GetNode<Tween>("Tween");
 
         Events.startNextLevel += OnNextLevel;
+        Events.restartGame += OnRestartGame;
     }
 
     public override void _ExitTree()
     {
         Events.startNextLevel -= OnNextLevel;
+        Events.restartGame -= OnRestartGame;
     }
 
-    async void OnNextLevel()
+    void OnRestartGame()
+    {
+        SwitchToNextLevel(true);
+    }
+
+    void OnNextLevel()
+    {
+        SwitchToNextLevel(false);
+    }
+
+    async void SwitchToNextLevel(bool startOver)
     {
         LevelsInfo li = LevelsInfo.Instance;
-
 
         // layer goes behind the level, provides green background
         //? we could probably set the clear color of the project and achieve the same w/out the canvas layer but that feels a bit hackish so we'll keep it this way
         bgCanvasLayer.Layer = -1;
-        
+
         // set the color of the ColorRect
         animPlayer.Play("nextLevel");
 
@@ -40,11 +52,23 @@ public class SceneChanger : Node2D
         String currentLevelName = Enum.GetName(currentLevelEnum.GetType(), (int)currentLevelEnum);
         Node2D currentLevelNode = GetNode<Node2D>("/root/" + currentLevelName);
 
+        Enums.Levels nextLevelEnum;
+
         // make next level scene and set the position to be above the screen
-        Enums.Levels nextLevelEnum = (Enums.Levels) ((int)currentLevelEnum + 1);
-        Node2D nextLevelScene = (Node2D) li.levelsList[nextLevelEnum].Instance();
-        nextLevelScene.Position = new Vector2(0, -720);
-        GetTree().Root.AddChild(nextLevelScene);
+        if (startOver)
+        {
+            nextLevelEnum = Enums.Levels.Level1;
+            Node2D nextLevelScene = (Node2D)li.levelsList[0].Instance();
+            nextLevelScene.Position = new Vector2(0, -720);
+            GetTree().Root.AddChild(nextLevelScene);
+        }
+        else
+        {
+            nextLevelEnum = (Enums.Levels)((int)currentLevelEnum + 1);
+            Node2D nextLevelScene = (Node2D)li.levelsList[nextLevelEnum].Instance();
+            nextLevelScene.Position = new Vector2(0, -720);
+            GetTree().Root.AddChild(nextLevelScene);
+        }
 
         // get the next level scene once added to scenetree
         String nextLevelName = Enum.GetName(nextLevelEnum.GetType(), (int)nextLevelEnum);
@@ -75,6 +99,7 @@ public class SceneChanger : Node2D
         playerCanvasLayer.RemoveChild(playerNode);
         nextLevelChild.AddChild(playerNode);
 
+        li.currentLevel = nextLevelEnum;
         // set the colorr rect back to transparent
         animPlayer.Play("start");
 
