@@ -24,5 +24,4 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="body_entered" from="." to="." method="OnGemBodyEntered"]
 [connection signal="tween_completed" from="Tween" to="." method="OnTweenTweenCompleted"]
