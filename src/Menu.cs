@@ -26,7 +26,7 @@ public class Menu : Control
         MenuContainer.Visible = Visible;
     }
 
-    void OnNewGameButtonPressed()
+    protected virtual void OnNewGameButtonPressed()
     {
         Events.PublishStartGame();
     }

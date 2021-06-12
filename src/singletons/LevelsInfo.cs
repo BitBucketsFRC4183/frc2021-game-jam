@@ -24,6 +24,7 @@ public class LevelsInfo : Node
 
         Events.startGame += OnStartGame;
         Events.startGame += Reset;
+        Events.restartGame += Reset;
         Events.endGame += OnEndGame;
 
         Events.gemCollected += OnGemCollected;
@@ -33,6 +34,7 @@ public class LevelsInfo : Node
     {
         Events.startGame -= OnStartGame;
         Events.startGame -= Reset;
+        Events.restartGame -= Reset;
         Events.endGame -= OnEndGame;
 
         Events.gemCollected -= OnGemCollected;
@@ -48,12 +50,13 @@ public class LevelsInfo : Node
         gameStarted = false;
     }
 
-    void OnGemCollected() {
+    void OnGemCollected()
+    {
         bananasCollectedThisRound++;
         bananasCollectedTotal++;
     }
 
-    void Reset() 
+    void Reset()
     {
         currentLevel = Enums.Levels.Level1;
         bananasCollectedThisRound = 0;
