@@ -26,6 +26,11 @@ public class Block : Area2D
         Events.levelCompleted += OnLevelCompleted;
     }
 
+    public override void _ExitTree()
+    {
+        Events.levelCompleted -= OnLevelCompleted;
+    }
+
     void OnRightBodyEntered(Node body)
     {
         if (body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;

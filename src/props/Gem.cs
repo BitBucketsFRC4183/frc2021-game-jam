@@ -21,11 +21,11 @@ public class Gem : Node2D
 
     void OnGemBodyEntered(Node body) {
         collisionShape.SetDeferred("disabled", true);
+        Events.PublishGemCollected();
         tween.Start();
     }
 
     void OnTweenTweenCompleted() {
-        Events.PublishGemCollected();
         QueueFree();
     }
 }
