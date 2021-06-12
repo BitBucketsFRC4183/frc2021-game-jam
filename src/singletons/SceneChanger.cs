@@ -77,6 +77,8 @@ public class SceneChanger : Node2D
 
         // set the colorr rect back to transparent
         animPlayer.Play("start");
+
+        Events.PublishNextLevelBegun();
     }
 
 }
