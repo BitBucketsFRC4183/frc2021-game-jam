@@ -13,7 +13,7 @@ public class Block : Area2D
     Tween.EaseType ease = Tween.EaseType.Out;
 
     // stores the boomerang this block has already collided with
-    Boomerang boomerangAlreadyCollidedWith;
+    BoomerangBody boomerangAlreadyCollidedWith;
 
     public override void _Ready()
     {
@@ -34,9 +34,9 @@ public class Block : Area2D
     void OnRightBodyEntered(Node body)
     {
         if (body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
-        boomerangAlreadyCollidedWith = (Boomerang)body;
+        boomerangAlreadyCollidedWith = (BoomerangBody)body;
 
-        var force = ((Boomerang)body).Force;
+        var force = ((BoomerangBody)body).Force;
 
         if (body.Name == "Boomerang")
         {
@@ -48,9 +48,9 @@ public class Block : Area2D
     void OnLeftBodyEntered(Node body)
     {
         if (body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
-        boomerangAlreadyCollidedWith = (Boomerang)body;
+        boomerangAlreadyCollidedWith = (BoomerangBody)body;
 
-        var force = ((Boomerang)body).Force;
+        var force = ((BoomerangBody)body).Force;
 
         if (body.Name == "Boomerang")
         {
@@ -62,9 +62,9 @@ public class Block : Area2D
     void OnTopBodyEntered(Node body)
     {
         if (body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
-        boomerangAlreadyCollidedWith = (Boomerang)body;
+        boomerangAlreadyCollidedWith = (BoomerangBody)body;
 
-        var force = ((Boomerang)body).Force;
+        var force = ((BoomerangBody)body).Force;
 
         if (body.Name == "Boomerang")
         {
@@ -76,9 +76,9 @@ public class Block : Area2D
     void OnBottomBodyEntered(Node body)
     {
         if (body.GetInstanceId() == boomerangAlreadyCollidedWith?.GetInstanceId()) return;
-        boomerangAlreadyCollidedWith = (Boomerang)body;
+        boomerangAlreadyCollidedWith = (BoomerangBody)body;
 
-        var force = ((Boomerang)body).Force;
+        var force = ((BoomerangBody)body).Force;
 
         if (body.Name == "Boomerang")
         {
