@@ -22,13 +22,10 @@ __meta__ = {
 position = Vector2( 234.759, 551.543 )
 
 [node name="FinishMenu" parent="." instance=ExtResource( 5 )]
-visible = false
 
 [node name="Menu" parent="." instance=ExtResource( 3 )]
-visible = false
 
 [node name="ScoreMenu" parent="." instance=ExtResource( 4 )]
-visible = false
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 5
