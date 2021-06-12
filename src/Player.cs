@@ -35,7 +35,6 @@ public class Player : Node2D
 
     public override void _ExitTree()
     {
-        base._ExitTree();
         Events.levelCompleted -= OnLevelCompleted;
     }
 
@@ -84,7 +83,6 @@ public class Player : Node2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        base._UnhandledInput(@event);
         if (@event.IsActionReleased("debug_mode"))
         {
             debugContainer.Visible = !debugContainer.Visible;
@@ -95,7 +93,6 @@ public class Player : Node2D
     void OnLevelCompleted()
     {
         Boomerang newBoomerang = (Boomerang)GD.Load<PackedScene>("res://src/props/Boomerang.tscn").Instance();
-        newBoomerang.Position = new Vector2(0, -37);
         sprites.AddChild(newBoomerang);
     }
 }

@@ -17,6 +17,7 @@ __meta__ = {
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ButtonBG" type="Button" parent="CanvasLayer"]
+visible = false
 margin_left = 30.0
 margin_top = 283.0
 margin_right = 455.0

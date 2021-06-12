@@ -40,7 +40,7 @@ public class Block : Area2D
 
         if (body.Name == "BoomerangBody")
         {
-            tween.InterpolateProperty(this, "position", null, Position - new Vector2(10 * force, 0), 2, trans, ease);
+            tween.InterpolateProperty(this, "position", null, Position - new Vector2(200 * force, 0), 2, trans, ease);
             tween.Start();
         }
     }
@@ -54,7 +54,7 @@ public class Block : Area2D
 
         if (body.Name == "BoomerangBody")
         {
-            tween.InterpolateProperty(this, "position", null, Position + new Vector2(10 * force, 0), 2, trans, ease);
+            tween.InterpolateProperty(this, "position", null, Position + new Vector2(200 * force, 0), 2, trans, ease);
             tween.Start();
         }
     }
@@ -68,7 +68,7 @@ public class Block : Area2D
 
         if (body.Name == "BoomerangBody")
         {
-            tween.InterpolateProperty(this, "position", null, Position + new Vector2(0, 10 * force), 2, trans, ease);
+            tween.InterpolateProperty(this, "position", null, Position + new Vector2(0, 200 * force), 2, trans, ease);
             tween.Start();
         }
     }
@@ -82,7 +82,7 @@ public class Block : Area2D
 
         if (body.Name == "BoomerangBody")
         {
-            tween.InterpolateProperty(this, "position", null, Position - new Vector2(0, 10 * force), 2, trans, ease);
+            tween.InterpolateProperty(this, "position", null, Position - new Vector2(0, 200 * force), 2, trans, ease);
             tween.Start();
         }
     }
