@@ -9,6 +9,9 @@ public class LevelsInfo : Node
     public Enums.Levels currentLevel = Enums.Levels.Level1;
     public Dictionary<Enums.Levels, PackedScene> levelsList;
 
+    public int bananasCollectedThisRound = 0;
+    public int bananasCollectedTotal = 0;
+
     public override void _Ready()
     {
         Instance = this;
@@ -20,13 +23,19 @@ public class LevelsInfo : Node
         };
 
         Events.startGame += OnStartGame;
+        Events.startGame += Reset;
         Events.endGame += OnEndGame;
+
+        Events.gemCollected += OnGemCollected;
     }
 
     public override void _ExitTree()
     {
         Events.startGame -= OnStartGame;
+        Events.startGame -= Reset;
         Events.endGame -= OnEndGame;
+
+        Events.gemCollected -= OnGemCollected;
     }
 
     void OnStartGame()
@@ -37,6 +46,18 @@ public class LevelsInfo : Node
     void OnEndGame()
     {
         gameStarted = false;
+    }
+
+    void OnGemCollected() {
+        bananasCollectedThisRound++;
+        bananasCollectedTotal++;
+    }
+
+    void Reset() 
+    {
+        currentLevel = Enums.Levels.Level1;
+        bananasCollectedThisRound = 0;
+        bananasCollectedTotal = 0;
     }
 
 }
