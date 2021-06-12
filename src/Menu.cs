@@ -30,10 +30,12 @@ public class Menu : Control
     {
         if (Visible)
         {
+            var menuContainerPosition = MenuContainer.RectPosition;
+            var buttonBGPosition = buttonBG.RectPosition;
             MenuContainer.RectPosition = new Vector2(0, -160);
             buttonBG.RectPosition = new Vector2(30, -160);
-            tween.InterpolateProperty(MenuContainer, "rect_position", null, new Vector2(0, 305), 1, Tween.TransitionType.Bounce, Tween.EaseType.Out);
-            tween.InterpolateProperty(buttonBG, "rect_position", null, new Vector2(30, 283), 1, Tween.TransitionType.Bounce, Tween.EaseType.Out);
+            tween.InterpolateProperty(MenuContainer, "rect_position", null, menuContainerPosition, 1, Tween.TransitionType.Bounce, Tween.EaseType.Out);
+            tween.InterpolateProperty(buttonBG, "rect_position", null, buttonBGPosition, 1, Tween.TransitionType.Bounce, Tween.EaseType.Out);
         }
 
         buttonBG.Visible = MenuContainer.Visible = Visible;
