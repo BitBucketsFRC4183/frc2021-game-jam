@@ -23,3 +23,5 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="."]
+
+[connection signal="tween_completed" from="Tween" to="." method="OnTweenTweenCompleted"]
