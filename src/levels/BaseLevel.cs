@@ -23,6 +23,7 @@ public class BaseLevel : Node2D
         }
 
         Events.startGame += OnStartGame;
+        Events.restartGame += OnRestartGame;
         Events.levelCompleted += OnLevelCompleted;
         Events.startNextLevel += OnStartNextLevel;
     }
@@ -30,6 +31,7 @@ public class BaseLevel : Node2D
     public override void _ExitTree()
     {
         Events.startGame -= OnStartGame;
+        Events.restartGame -= OnRestartGame;
         Events.levelCompleted -= OnLevelCompleted;
         Events.startNextLevel -= OnStartNextLevel;
     }
@@ -57,12 +59,19 @@ public class BaseLevel : Node2D
         }
         GetTree().Paused = true;
         HUDContainer.Visible = false;
-
     }
 
     void OnStartNextLevel()
     {
         ScoreMenu.Visible = false;
+        GetTree().Paused = false;
+        HUDContainer.Visible = true;
+    }
+
+    void OnRestartGame()
+    {
+        ScoreMenu.Visible = false;
+        FinishMenu.Visible = false;
         GetTree().Paused = false;
         HUDContainer.Visible = true;
     }

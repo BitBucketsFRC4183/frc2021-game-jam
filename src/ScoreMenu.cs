@@ -31,8 +31,7 @@ public class ScoreMenu : Control
         ExitButton.Connect("pressed", this, nameof(OnExitButtonPressed));
 
         Connect("visibility_changed", this, nameof(OnVisbilityChanged));
-        MenuContainer.Visible = Visible;
-        buttonBG.Visible = Visible;
+        buttonBG.Visible = MenuContainer.Visible = Visible;
     }
 
     void OnVisbilityChanged()
