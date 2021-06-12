@@ -17,13 +17,13 @@ __meta__ = {
 }
 
 [node name="Block" parent="." index="3" instance=ExtResource( 3 )]
-position = Vector2( 402, 157 )
+position = Vector2( 411.506, 249.639 )
 
 [node name="Gem3" parent="." index="4" instance=ExtResource( 2 )]
-position = Vector2( 364.477, 238.785 )
+position = Vector2( 224.626, 202.431 )
 
 [node name="Gem4" parent="." index="5" instance=ExtResource( 2 )]
-position = Vector2( 317.676, 312.384 )
+position = Vector2( 94.1889, 257.383 )
 
 [node name="Gem5" parent="." index="6" instance=ExtResource( 2 )]
-position = Vector2( 418.757, 111.785 )
+position = Vector2( 413.557, 156.226 )

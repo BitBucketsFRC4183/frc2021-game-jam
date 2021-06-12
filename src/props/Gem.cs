@@ -17,6 +17,7 @@ public class Gem : Node2D
         tween.InterpolateProperty(sprite, "modulate", null, new Color(0, 0, 0, 0), (float)0.6, Tween.TransitionType.Linear, Tween.EaseType.Out);
 
         this.Connect("body_entered", this, nameof(OnGemBodyEntered));
+        this.Connect("area_entered", this, nameof(OnGemAreaEntered));
         tween.Connect("tween_completed", this, nameof(OnTweenTweenCompleted));
 
         Events.startNextLevel += OnStartNextLevel;
@@ -28,6 +29,11 @@ public class Gem : Node2D
     }
 
     void OnGemBodyEntered(Node body) {
+        collisionShape.SetDeferred("disabled", true);
+        Events.PublishGemCollected();
+        tween.Start();
+    }
+    void OnGemAreaEntered(Area2D area) {
         collisionShape.SetDeferred("disabled", true);
         Events.PublishGemCollected();
         tween.Start();
