@@ -16,6 +16,7 @@ public class ScoreMenu : Control
 
     public int Score { get; set; } = 0;
 
+
     public override void _Ready()
     {
         StartNextLevelButton = (Button)FindNode("StartNextLevelButton");
@@ -32,11 +33,13 @@ public class ScoreMenu : Control
 
         Connect("visibility_changed", this, nameof(OnVisbilityChanged));
         buttonBG.Visible = MenuContainer.Visible = Visible;
+
     }
 
     void OnVisbilityChanged()
     {
-        if (Visible) {
+        if (Visible)
+        {
             MenuContainer.RectPosition = new Vector2(0, -160);
             buttonBG.RectPosition = new Vector2(30, -160);
             tween.InterpolateProperty(MenuContainer, "rect_position", null, new Vector2(0, 305), 1, Tween.TransitionType.Bounce, Tween.EaseType.Out);
@@ -51,13 +54,13 @@ public class ScoreMenu : Control
         Banana3.Visible = Visible;
 
         Score = LevelsInfo.Instance.bananasCollectedThisRound;
-        
+
         if (Score <= 2) Banana3.SelfModulate = new Color("000000");
         else Banana3.SelfModulate = new Color("FFFFFF");
 
         if (Score <= 1) Banana2.SelfModulate = new Color("000000");
         else Banana2.SelfModulate = new Color("FFFFFF");
-        
+
         if (Score <= 0) Banana1.SelfModulate = new Color("000000");
         else Banana1.SelfModulate = new Color("FFFFFF");
     }

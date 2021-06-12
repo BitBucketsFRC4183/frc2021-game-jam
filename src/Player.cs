@@ -3,6 +3,10 @@ using Godot;
 
 public class Player : Node2D
 {
+    Control debugContainer;
+    Label forceLabel;
+    Label angleLabel;
+
     Boomerang boomerang;
     Tween tween;
     ProgressBar forceBar;
@@ -16,6 +20,12 @@ public class Player : Node2D
 
     public override void _Ready()
     {
+        // debug control nodes
+        debugContainer = (Control)FindNode("DebugContainer");
+        forceLabel = (Label)FindNode("ForceLabel");
+        angleLabel = (Label)FindNode("AngleLabel");
+
+        // boomerang and throwing nodes
         boomerang = GetNode<Boomerang>("PlayerSprites/Boomerang");
         tween = GetNode<Tween>("Tween");
         forceBar = GetNode<ProgressBar>("ForceBar");
@@ -72,9 +82,21 @@ public class Player : Node2D
             }
         }
 
+        forceLabel.Text = $"Force: {forceLevel}";
+        angleLabel.Text = $"Angle: {sprites.Rotation}";
+
         tween.InterpolateProperty(forceBar, "value", null, forceLevel, (float)0.1);
         tween.Start();
 
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        base._UnhandledInput(@event);
+        if (@event.IsActionReleased("debug_mode"))
+        {
+            debugContainer.Visible = !debugContainer.Visible;
+        }
     }
 
     // TODO: TEMPORARY!

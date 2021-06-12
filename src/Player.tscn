@@ -132,3 +132,26 @@ percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DebugContainer" type="VBoxContainer" parent="."]
+visible = false
+margin_left = 49.4102
+margin_top = -133.164
+margin_right = 121.41
+margin_bottom = -93.1638
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForceLabel" type="Label" parent="DebugContainer"]
+margin_right = 72.0
+margin_bottom = 14.0
+text = "Force: 1"
+align = 2
+
+[node name="AngleLabel" type="Label" parent="DebugContainer"]
+margin_top = 18.0
+margin_right = 72.0
+margin_bottom = 32.0
+text = "Angle: 3.14"
+align = 2
