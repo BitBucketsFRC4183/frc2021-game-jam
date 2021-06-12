@@ -45,8 +45,6 @@ public class BaseLevel : Node2D
 
     void OnLevelCompleted()
     {
-        ScoreMenu.Score = 2; // TODO: add in actual score..
-
         var levels = Enum.GetValues(typeof(Enums.Levels));
         if (LevelsInfo.Instance.currentLevel == (Enums.Levels)levels.GetValue(levels.Length - 1))
         {

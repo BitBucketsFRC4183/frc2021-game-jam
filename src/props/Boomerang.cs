@@ -32,8 +32,6 @@ public class Boomerang : Path2D
 		var b = 250 * Force;
 		var a = b * .5f;
 		path.Curve.ClearPoints();
-		//pathFollow2D.Offset = b * 2;
-		//pathFollow2D.UnitOffset = 1;
 
 		// go forwards
 		for (float y = -b; y < b; y++)
@@ -68,14 +66,12 @@ public class Boomerang : Path2D
 			pathFollow2D, "unit_offset", 0.5, 0, timeBoomerangTakes / 2, Tween.TransitionType.Linear, Tween.EaseType.InOut
 		);
 		tween.Start();
-
 		await ToSignal(tween, "tween_completed");
 
 		tween.InterpolateProperty(
 			pathFollow2D, "unit_offset", 0, -0.5, timeBoomerangTakes / 2, Tween.TransitionType.Linear, Tween.EaseType.InOut
 		);
 		tween.Start();
-
 		await ToSignal(tween, "tween_completed");
 
 		Events.PublishLevelCompleted();
