@@ -13,9 +13,6 @@ public class Player : Node2D
     Node2D sprites;
     bool barIncreasingInPower = true;
 
-    float forceLevel = 0;
-    float maxForceLevel = 10;
-
     bool changingForce = false;
 
     public override void _Ready()
@@ -27,7 +24,6 @@ public class Player : Node2D
 
         // boomerang and throwing nodes
         boomerang = GetNode<Boomerang>("PlayerSprites/Boomerang");
-        tween = GetNode<Tween>("Tween");
         forceBar = GetNode<ProgressBar>("ForceBar");
         sprites = GetNode<Node2D>("PlayerSprites");
 
@@ -55,16 +51,16 @@ public class Player : Node2D
 
             if (barIncreasingInPower)
             {
-                forceLevel += 0.1f;
-                if (forceLevel >= maxForceLevel)
+                forceBar.Value += forceBar.Step;
+                if (forceBar.Value >= forceBar.MaxValue)
                 {
                     barIncreasingInPower = false;
                 }
             }
             else
             {
-                forceLevel -= 0.1f;
-                if (forceLevel <= 0)
+                forceBar.Value -= forceBar.Step;
+                if (forceBar.Value <= forceBar.MinValue)
                 {
                     barIncreasingInPower = true;
                 }
@@ -75,19 +71,15 @@ public class Player : Node2D
             if (changingForce)
             {
                 changingForce = false;
-                boomerang.Throw(sprites.Rotation, forceLevel);
-                forceLevel = 0;
+                boomerang.Throw(sprites.Rotation, (float)forceBar.Value);
+                forceBar.Value = 0;
                 barIncreasingInPower = true;
                 forceBar.Hide();
             }
         }
 
-        forceLabel.Text = $"Force: {forceLevel}";
+        forceLabel.Text = $"Force: {forceBar.Value}";
         angleLabel.Text = $"Angle: {sprites.Rotation}";
-
-        tween.InterpolateProperty(forceBar, "value", null, forceLevel, (float)0.1);
-        tween.Start();
-
     }
 
     public override void _UnhandledInput(InputEvent @event)
