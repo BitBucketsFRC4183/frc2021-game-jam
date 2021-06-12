@@ -28,14 +28,6 @@ public class Player : Node2D
         sprites = GetNode<Node2D>("PlayerSprites");
 
         forceBar.Hide();
-
-        // TODO: TEMPORARY!
-        Events.levelCompleted += OnLevelCompleted;
-    }
-
-    public override void _ExitTree()
-    {
-        Events.levelCompleted -= OnLevelCompleted;
     }
 
     public override void _PhysicsProcess(float delta)
@@ -87,12 +79,5 @@ public class Player : Node2D
         {
             debugContainer.Visible = !debugContainer.Visible;
         }
-    }
-
-    // TODO: TEMPORARY!
-    void OnLevelCompleted()
-    {
-        Boomerang newBoomerang = (Boomerang)GD.Load<PackedScene>("res://src/props/Boomerang.tscn").Instance();
-        sprites.AddChild(newBoomerang);
     }
 }
