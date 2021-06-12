@@ -29,14 +29,14 @@ public class Boomerang : Path2D
         path.Curve.ClearPoints();
 
         // go forwards
-        for (float y = -b; y < b; y++)
+        for (float y = -b; y < b; y += 2)
         {
             float x = (float)Math.Sqrt(a * a - ((a * y * a * y) / (b * b)));
             path.Curve.AddPoint(new Vector2(x, y));
         }
 
         // go backwards
-        for (float y = b; y > -b; y--)
+        for (float y = b; y > -b; y -= 2)
         {
             float x = -(float)Math.Sqrt(a * a - ((a * y * a * y) / (b * b)));
             path.Curve.AddPoint(new Vector2(x, y));
@@ -50,7 +50,7 @@ public class Boomerang : Path2D
         GetParent()?.RemoveChild(this);
         root.AddChild(this);
         GlobalPosition = globalPosition;
-        path.GlobalPosition = new Vector2(globalPosition.x, globalPosition.y - b);
+        path.GlobalPosition = new Vector2(globalPosition.x, globalPosition.y + (angle > Math.PI ? (b - 32) : -(b - 32)));
         path.Rotation = (float)angle;
 
         var direction = new Vector2((float)Math.Sin(angle), -(float)Math.Cos(angle)).Normalized();
